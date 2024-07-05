@@ -1,42 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
     let tree = document.getElementById("root");
 
-    function createBookmarkItem(bookmark) {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = bookmark.url;
-        a.textContent = bookmark.title || bookmark.url;
-        li.appendChild(a);
-        return li;
-    }
+    function addElements(child, parent) {
+        let el = document.createElement("li");
 
-    function displayBookmarks(bookmarks, parentElement) {
-        bookmarks.forEach((bookmark) => {
-            if (bookmark.url) {
-                parentElement.appendChild(createBookmarkItem(bookmark));
-            } else {
-                let folderLi = document.createElement("li");
-                folderLi.textContent = bookmark.title;
+        if (child.type === "folder") {
+            let nameEl = document.createElement("span");
+            nameEl.textContent = child.title.toLowerCase();
+            el.appendChild(nameEl);
 
-                let sublist = document.createElement("ul");
-                folderLi.appendChild(sublist);
+            let listEl = document.createElement("ul");
+            child.children.forEach(temp => {
+                addElements(temp, listEl);
+            });
+            el.appendChild(listEl);
+        } else if (child.type === "bookmark") {
+            let linkEl = document.createElement("a");
+            linkEl.textContent = child.title.toLowerCase();
+            linkEl.href = child.url;
+            el.appendChild(linkEl);
+        }
 
-                parentElement.appendChild(folderLi);
-
-                displayBookmarks(bookmark.children, sublist);
-            }
-        });
+        parent.appendChild(el);
     }
 
     browser.bookmarks.getTree().then(subjects => {
-        subjects[0].children[1].children.forEach((child) => {
-            if (child.type === "folder") {
-                let title = document.createElement("p");
-                title.textContent = child.title;
-                title.classList.add("title");
-                tree.appendChild(title);
-                displayBookmarks(child.children, title);
-            }
+        let root = subjects[0].children[1].children;
+
+        root.forEach(child => {
+            addElements(child, tree);
         });
     });
 });

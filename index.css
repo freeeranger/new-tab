@@ -5,30 +5,63 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: monospace;
     background-color: #272a30;
+    font-size: 1rem;
+    color: blue;
 }
 
-.title>li,
-.title>ul,
-ul>li,
-ul>ul {
-    margin-left: 40px;
-}
-
-.title {
-    color: red;
-}
-
-
+/* chatgpt below */
 ul {
-    color: green;
+    list-style-type: none;
+    padding-left: 32px;
+    position: relative;
 }
 
 li {
-    color: white;
+    position: relative;
 }
 
-a {
-    color: blue;
+li::before {
+    content: "\2514\2500\2500 ";
+    /* Unicode for └── */
+    font-family: monospace;
+    /* Optional: ensures consistent appearance */
+    position: absolute;
+    left: -32px;
+}
+
+li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: -32px;
+    /* Align with the line created by ::before */
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: red;
+}
+
+ul ul::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -32px;
+    bottom: 0;
+    width: 1px;
+    background: orange;
+}
+
+ul>li::before {
+    content: "\251c\2500\2500 ";
+    /* Unicode for ├── */
+}
+
+ul>li:last-child::before {
+    content: "\2514\2500\2500 ";
+    /* Unicode for └── */
+}
+
+#root>li {
+    margin-left: 32px;
 }
