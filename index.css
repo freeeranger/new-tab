@@ -1,3 +1,33 @@
+:root {
+    --bg-color: #181825;
+    --terminal-bg-color: #1e1e2e;
+    --link-color: #cdd6f4;
+    --directory-color: #94e2d5;
+    --line-color: #45475a;
+
+    --prompt-primary-color: #a6e3a1;
+    --prompt-git-outer-color: #89b4fa;
+    --prompt-git-inner-color: #f38ba8;
+    --prompt-separator-color: #f9e2af;
+}
+
+.prompt-arrow,
+.prompt-command {
+    color: var(--prompt-primary-color);
+}
+
+.prompt-git-outer {
+    color: var(--prompt-git-outer-color);
+}
+
+.prompt-git-inner {
+    color: var(--prompt-git-inner-color);
+}
+
+.prompt-separator {
+    color: var(--prompt-separator-color);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,8 +36,8 @@
 
 body {
     font-family: monospace;
-    background-color: #272a30;
-    color: white;
+    background-color: var(--bg-color);
+    color: var(--directory-color);
     font-size: 1rem;
 
     display: flex;
@@ -18,7 +48,7 @@ body {
 }
 
 .container {
-    background: black;
+    background: var(--terminal-bg-color);
     width: 50vw;
     padding: 16px;
     border-radius: 5px;
@@ -30,7 +60,7 @@ p {
 }
 
 a {
-    color: lime;
+    color: var(--link-color);
     text-decoration: none;
 }
 
@@ -61,7 +91,7 @@ ul li::before {
     left: -1.3em;
     position: absolute;
     width: 1em;
-    color: gray;
+    color: var(--line-color);
 }
 
 ul li::after {
@@ -71,5 +101,5 @@ ul li::after {
     left: -1.3em;
     position: absolute;
     top: 0;
-    color: gray;
+    color: var(--line-color);
 }
