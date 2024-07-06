@@ -4,9 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function addElements(child, parent) {
         let el = document.createElement("li");
 
+        let elName = child.title.toLowerCase().replace(" ", "-");
+
         if (child.type === "folder") {
             let nameEl = document.createElement("span");
-            nameEl.textContent = child.title.toLowerCase();
+            nameEl.textContent = elName;
             el.appendChild(nameEl);
 
             let listEl = document.createElement("ul");
@@ -16,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
             el.appendChild(listEl);
         } else if (child.type === "bookmark") {
             let linkEl = document.createElement("a");
-            linkEl.textContent = child.title.toLowerCase();
+            linkEl.textContent = elName;
             linkEl.href = child.url;
             el.appendChild(linkEl);
         }
