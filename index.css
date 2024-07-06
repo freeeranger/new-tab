@@ -7,61 +7,69 @@
 body {
     font-family: monospace;
     background-color: #272a30;
+    color: white;
     font-size: 1rem;
-    color: blue;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
 }
 
-/* chatgpt below */
+.container {
+    background: black;
+    width: 50vw;
+    padding: 16px;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+p {
+    margin-left: 7px;
+}
+
+a {
+    color: lime;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 ul {
-    list-style-type: none;
-    padding-left: 32px;
-    position: relative;
-}
-
-li {
-    position: relative;
-}
-
-li::before {
-    content: "\2514\2500\2500 ";
-    /* Unicode for └── */
     font-family: monospace;
-    /* Optional: ensures consistent appearance */
-    position: absolute;
-    left: -32px;
+    line-height: 1.5em;
+    list-style-type: "";
 }
 
-li:not(:last-child)::after {
+ul li {
+    margin-left: 2em;
+    position: relative;
+}
+
+ul li:last-child::after {
+    display: none;
+}
+
+ul li::before {
+    border-bottom: 1px solid;
+    border-left: 1px solid;
     content: "";
+    height: 0.75em;
+    left: -1.3em;
     position: absolute;
-    left: -32px;
-    /* Align with the line created by ::before */
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: red;
+    width: 1em;
+    color: gray;
 }
 
-ul ul::before {
+ul li::after {
+    border-left: 1px solid;
     content: "";
+    height: 100%;
+    left: -1.3em;
     position: absolute;
     top: 0;
-    left: -32px;
-    bottom: 0;
-    width: 1px;
-    background: orange;
-}
-
-ul>li::before {
-    content: "\251c\2500\2500 ";
-    /* Unicode for ├── */
-}
-
-ul>li:last-child::before {
-    content: "\2514\2500\2500 ";
-    /* Unicode for └── */
-}
-
-#root>li {
-    margin-left: 32px;
+    color: gray;
 }
