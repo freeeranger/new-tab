@@ -65,7 +65,6 @@ a:hover {
 }
 
 ul {
-    font-family: monospace;
     line-height: 1.5em;
     list-style-type: "";
 }
@@ -75,10 +74,8 @@ ul li {
     position: relative;
 }
 
-ul li:last-child::after {
-    display: none;
-}
 
+/* horizontal lines */
 ul li::before {
     border-bottom: 1px solid;
     border-left: 1px solid;
@@ -90,6 +87,7 @@ ul li::before {
     color: var(--line-color);
 }
 
+/* vertical lines */
 ul li::after {
     border-left: 1px solid;
     content: "";
@@ -98,4 +96,9 @@ ul li::after {
     position: absolute;
     top: 0;
     color: var(--line-color);
+}
+
+/* no vertical line for last element */
+ul li:last-child::after {
+    display: none;
 }

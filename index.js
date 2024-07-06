@@ -1,22 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let tree = document.getElementById("root");
+    let rootEl = document.getElementById("root");
 
     function addElements(child, parent) {
         let el = document.createElement("li");
 
-        let elName = child.title.toLowerCase().replace(" ", "-");
+        let elName = child.title.toLowerCase().replace(" ", "-"); // Terminal-style element name
 
         if (child.type === "folder") {
+            // Create the directory element
             let nameEl = document.createElement("span");
             nameEl.textContent = elName;
-            el.appendChild(nameEl);
-
             let listEl = document.createElement("ul");
+            el.appendChild(nameEl);
+            el.appendChild(listEl);
+
+            // Run addElements on each child
             child.children.forEach(temp => {
                 addElements(temp, listEl);
             });
-            el.appendChild(listEl);
-        } else if (child.type === "bookmark") {
+        } else if (child.type === "bookmark") { // Create the link element
             let linkEl = document.createElement("a");
             linkEl.textContent = elName;
             linkEl.href = child.url;
@@ -26,11 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
         parent.appendChild(el);
     }
 
+    // Run addElements on each element in the bookmark bar
     browser.bookmarks.getTree().then(subjects => {
-        let root = subjects[0].children[1].children;
-
-        root.forEach(child => {
-            addElements(child, tree);
+        subjects[0].children[1].children.forEach(child => {
+            addElements(child, rootEl);
         });
     });
 });
