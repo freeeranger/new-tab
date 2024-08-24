@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     let rootEl = document.getElementById("root");
 
     function addElements(child, parent) {
@@ -15,10 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
             el.appendChild(listEl);
 
             // Run addElements on each child
-            child.children.forEach(temp => {
+            child.children.forEach((temp) => {
                 addElements(temp, listEl);
             });
-        } else if (child.type === "bookmark") { // Create the link element
+        } else if (child.type === "bookmark") {
+            // Create the link element
             let linkEl = document.createElement("a");
             linkEl.textContent = elName;
             linkEl.href = child.url;
@@ -29,9 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Run addElements on each element in the bookmark bar
-    browser.bookmarks.getTree().then(subjects => {
-        subjects[0].children[1].children.forEach(child => {
+    browser.bookmarks.getTree().then((subjects) => {
+        subjects[0].children[1].children.forEach((child) => {
             addElements(child, rootEl);
         });
+    });
+
+    // Filtering feature
+    document.addEventListener("keydown", (event) => {
+        console.log(event.key);
     });
 });
